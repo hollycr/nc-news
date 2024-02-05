@@ -1,5 +1,10 @@
+import { Link } from "react-router-dom";
 function Header() {
-  return <h1>header</h1>;
+  return (
+    <Link to="/home">
+      <h1>nc newsit</h1>
+    </Link>
+  );
 }
 
 export default Header;

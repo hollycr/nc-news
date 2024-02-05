@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import UserContext from "./context/UserContext";
 import "./App.css";
 import Header from "./components/Header";
-import ArticlesManager from "./components/ArticleManager";
+import ArticlesManager from "./components/ArticlesManager";
+import SingleArticleManager from "./components/SingleArticleManager";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({
@@ -18,8 +19,12 @@ function App() {
       <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
         <Header />
         <Routes>
-          <Route path="/" element={<ArticlesManager />} />
           <Route path="/home" element={<ArticlesManager />} />
+          <Route
+            path="/article/:article_id"
+            element={<SingleArticleManager />}
+          />
+          <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </UserContext.Provider>
     </>
@@ -27,9 +32,3 @@ function App() {
 }
 
 export default App;
-
-/*{
-"username": "happyamy2016",
-"name": "Amy Happy",
-"avatar_url": "https://vignette1.wikia.nocookie.net/mrmen/images/7/7f/Mr_Happy.jpg/revision/latest?cb=20140102171729"
-}*/
