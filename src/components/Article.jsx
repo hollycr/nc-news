@@ -2,10 +2,13 @@ import { getSingleArticle } from "../api/articles";
 import { useEffect, useState } from "react";
 
 import Card from "@mui/joy/Card";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 function Article({ article_id }) {
   const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [displayedVotes, setDisplayedVotes] = useState(5);
 
   useEffect(() => {
     getSingleArticle(article_id).then((res) => {
@@ -14,8 +17,18 @@ function Article({ article_id }) {
     });
   }, []);
 
+  useEffect(() => {
+    setDisplayedVotes(article.votes);
+  }, [article]);
+
   if (isLoading) {
     return <p>Just loading your article...</p>;
+  }
+
+  function handleUpVote() {
+    setDisplayedVotes((current) => (current += 1));
+    // patchArticleVotes - make axios function
+    // set button as disabled after 1st click? (one vote per user)
   }
 
   return (
@@ -32,8 +45,14 @@ function Article({ article_id }) {
         <p>{article.body}</p>
         <div>
           <p>
-            votes: {article.votes} comments:{article.comment_count}
+            votes: {displayedVotes} comments:{article.comment_count}
           </p>
+          <button aria-label="upvote by one" onClick={handleUpVote}>
+            <ThumbUpIcon />
+          </button>
+          <button aria-label="downvote by one">
+            <ThumbDownIcon />
+          </button>
         </div>
       </article>
     </Card>
