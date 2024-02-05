@@ -1,10 +1,15 @@
+import { Link } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 
 function ArticlesList({ articles }) {
   return (
     <main>
       {articles.map((article) => {
-        return <ArticleCard key={article.title} article={article} />;
+        return (
+          <Link key={article.title} to={`/article/${article.article_id}`}>
+            <ArticleCard article={article} />
+          </Link>
+        );
       })}
     </main>
   );

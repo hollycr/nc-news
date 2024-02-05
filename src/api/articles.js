@@ -9,4 +9,13 @@ function getArticles() {
     });
 }
 
-export { getArticles };
+function getSingleArticle(id) {
+  return axios
+    .get(`https://hollycr-nc-news.onrender.com/api/articles/${id}`)
+    .then(({ data }) => {
+      const { article } = data;
+      return article;
+    });
+}
+
+export { getArticles, getSingleArticle };
