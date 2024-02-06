@@ -21,4 +21,10 @@ function postComment(id, comment) {
     });
 }
 
-export { getComments, postComment };
+function deleteComment(comment_id) {
+  return axios.delete(
+    `https://hollycr-nc-news.onrender.com/api/comments/${comment_id}`
+  );
+}
+
+export { getComments, postComment, deleteComment };

@@ -21,6 +21,7 @@ function PostComment({ article_id, setCommentsChange }) {
         setFeedbackMsg("Oops! Couldn't post your comment. Try again later!");
       });
     setUserInput("");
+    setCommentsChange(false);
   }
 
   function handleInput(event) {
@@ -45,7 +46,14 @@ function PostComment({ article_id, setCommentsChange }) {
           required
         />
       </div>
-      <button style={{ backgroundColor: "#eea0a2" }}>Comment</button>
+      <button
+        style={{ backgroundColor: "#eea0a2" }}
+        onBlur={() => {
+          setFeedbackMsg("");
+        }}
+      >
+        Comment
+      </button>
       <p>{feedbackMsg}</p>
     </form>
   );

@@ -22,7 +22,13 @@ function Comments({ article_id }) {
         article_id={article_id}
       />
       {comments.map((comment) => {
-        return <CommentCard key={comment.comment_id} comment={comment} />;
+        return (
+          <CommentCard
+            key={comment.comment_id}
+            comment={comment}
+            setCommentsChange={setCommentsChange}
+          />
+        );
       })}
     </section>
   );
