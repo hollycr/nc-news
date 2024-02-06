@@ -9,4 +9,16 @@ function getComments(id) {
     });
 }
 
-export { getComments };
+function postComment(id, comment) {
+  return axios
+    .post(
+      `https://hollycr-nc-news.onrender.com/api/articles/${id}/comments`,
+      comment
+    )
+    .then(({ data }) => {
+      const { comment } = data;
+      return comment;
+    });
+}
+
+export { getComments, postComment };
