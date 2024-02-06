@@ -18,4 +18,15 @@ function getSingleArticle(id) {
     });
 }
 
-export { getArticles, getSingleArticle };
+function patchArticle(id, votes) {
+  return axios
+    .patch(`https://hollycr-nc-news.onrender.com/api/articles/${id}`, {
+      inc_votes: votes,
+    })
+    .then(({ data }) => {
+      const { article } = data;
+      return article;
+    });
+}
+
+export { getArticles, getSingleArticle, patchArticle };
