@@ -46,7 +46,9 @@ function TopicsLinks({ title, setTitle }) {
         anchor="left"
       >
         <List>
-          <ListItem> Topics: </ListItem>
+          <ListItem>
+            <h3> Topics:</h3>{" "}
+          </ListItem>
           {topics.map((topic) => (
             <ListItem key={topic.slug} disablePadding>
               <Link to={`/articles/${topic.slug}`}>

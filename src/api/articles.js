@@ -1,9 +1,9 @@
 import axios from "axios";
 
-function getArticles(topic) {
+function getArticles(topic, sortBy) {
   let queryStr = "https://hollycr-nc-news.onrender.com/api/articles";
   if (topic) queryStr += `?topic=${topic}`;
-
+  if (sortBy) queryStr += `?sort_by=${sortBy}`;
   return axios.get(queryStr).then(({ data }) => {
     const { articles } = data;
     return articles;

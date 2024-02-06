@@ -11,18 +11,19 @@ function ArticlesManager() {
   const { topic } = useParams();
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
-    getArticles(topic).then((res) => {
+    getArticles(topic, sortBy).then((res) => {
       setArticles(res);
       setIsLoading(false);
     });
-  }, [topic]);
+  }, [topic, sortBy]);
 
   return (
     <>
       <PostArticle />
-      <SortArticles />
+      <SortArticles setSortBy={setSortBy} sortBy={sortBy} />
       {isLoading ? (
         <p>Just fetching some articles for you..</p>
       ) : (
