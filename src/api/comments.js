@@ -17,7 +17,6 @@ function postComment(id, comment) {
     )
     .then(({ data }) => {
       const { comment } = data;
-      console.log(comment, "<< data returned in post axios");
       return comment;
     });
 }
