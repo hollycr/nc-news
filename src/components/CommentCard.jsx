@@ -8,10 +8,11 @@ import CardContent from "@mui/material/CardContent";
 
 function CommentCard({ comment, setCommentsChange }) {
   const { loggedInUser } = useContext(UserContext);
-  const [commentId, setCommentId] = useState(null);
+  const [deleteMsg, setDeleteMsg] = useState("");
 
   function handleDelete(event) {
     deleteComment(event.target.value).then(() => {
+      setDeleteMsg("deleted!");
       setCommentsChange(true);
     });
     setCommentsChange(false);
@@ -33,6 +34,7 @@ function CommentCard({ comment, setCommentsChange }) {
           </button>
         ) : null}
       </div>
+      <p>{deleteMsg}</p>
     </Card>
   );
 }
