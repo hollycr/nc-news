@@ -4,8 +4,9 @@ import { postComment } from "../api/comments";
 
 function PostComment({ article_id, setCommentsChange }) {
   const { loggedInUser } = useContext(UserContext);
+  const standardMsg = `Commenting as ${loggedInUser.username}..`;
   const [userInput, setUserInput] = useState("");
-  const [feedbackMsg, setFeedbackMsg] = useState("");
+  const [feedbackMsg, setFeedbackMsg] = useState(standardMsg);
 
   function handlePostComment(event) {
     event.preventDefault();
@@ -29,6 +30,7 @@ function PostComment({ article_id, setCommentsChange }) {
   }
   return (
     <form onSubmit={handlePostComment}>
+      <p>{feedbackMsg} </p>
       <label htmlFor="new-comment">Add a comment:</label>
       <div>
         <input
@@ -49,12 +51,11 @@ function PostComment({ article_id, setCommentsChange }) {
       <button
         style={{ backgroundColor: "#eea0a2" }}
         onBlur={() => {
-          setFeedbackMsg("");
+          setFeedbackMsg(standardMsg);
         }}
       >
         Comment
       </button>
-      <p>{feedbackMsg}</p>
     </form>
   );
 }

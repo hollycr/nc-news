@@ -20,6 +20,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/home" element={<ArticlesManager />} />
+          <Route path="/articles/:topic" element={<ArticlesManager />} />
           <Route
             path="/article/:article_id"
             element={<SingleArticleManager />}
