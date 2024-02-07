@@ -49,7 +49,7 @@ function PostComment({ article_id, setCommentsChange }) {
         />
       </div>
       <button
-        style={{ backgroundColor: "#eea0a2", margin: "0.5rem" }}
+        style={{ backgroundColor: "#eea0a2", margin: "0.5rem", color: "black" }}
         onBlur={() => {
           setFeedbackMsg(standardMsg);
         }}

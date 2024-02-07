@@ -29,7 +29,7 @@ function CommentCard({ comment, setCommentsChange }) {
         {comment.author === loggedInUser.username ? (
           <button
             value={comment.comment_id}
-            style={{ backgroundColor: "#e4e4e4" }}
+            style={{ backgroundColor: "#e4e4e4", color: "black" }}
             onClick={handleDelete}
           >
             delete comment
