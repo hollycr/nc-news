@@ -39,6 +39,7 @@ function PostComment({ article_id, setCommentsChange }) {
             height: "100px",
             textAlign: "center",
             border: "1px solid black",
+            background: "white",
           }}
           onChange={handleInput}
           value={userInput}

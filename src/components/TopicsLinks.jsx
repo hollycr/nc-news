@@ -76,7 +76,7 @@ function TopicsLinks({ title, setTitle }) {
         onClick={toggleDrawer(true)}
         style={{ color: "#fa2020", padding: "30px" }}
       >
-        <h2 style={{ color: "black" }}>{title}</h2>
+        <h2 style={{ color: "black", display: "inline-flex" }}>{title}</h2>
       </Button>
       <Drawer
         open={isOpen}
