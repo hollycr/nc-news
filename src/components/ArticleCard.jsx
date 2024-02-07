@@ -13,7 +13,7 @@ function ArticleCard({ article }) {
         <h4>{article.author}</h4>
 
         <p>
-          Votes: {article.votes} Comments:{article.comment_count}
+          Votes: {article.votes} Comments: {article.comment_count}
         </p>
       </Card>
     </>
