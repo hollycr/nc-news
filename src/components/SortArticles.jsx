@@ -18,9 +18,9 @@ function SortArticles({ searchParams, setSearchParams }) {
   }
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", padding: "10px" }}>
       <Box sx={{ minWidth: 130 }}>
-        <FormControl fullWidth>
+        <FormControl fullWidth style={{ backgroundColor: "white" }}>
           <InputLabel id="sort-by">Sort By:</InputLabel>
           <Select
             labelId="sort-by-label"
@@ -47,7 +47,7 @@ function SortArticles({ searchParams, setSearchParams }) {
         </FormControl>
       </Box>
       <Box sx={{ minWidth: 130 }}>
-        <FormControl fullWidth>
+        <FormControl fullWidth style={{ backgroundColor: "white" }}>
           <InputLabel id="select-order">Order By:</InputLabel>
           <Select
             labelId="select-order-label"

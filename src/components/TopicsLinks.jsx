@@ -35,10 +35,10 @@ function TopicsLinks({ title, setTitle }) {
       <CssBaseline />
       <Drawer
         sx={{
-          width: 240,
+          width: 130,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: 240,
+            width: 130,
             boxSizing: "border-box",
           },
         }}
@@ -57,7 +57,10 @@ function TopicsLinks({ title, setTitle }) {
                     setTitle(`Topic: ${topic.slug}`);
                   }}
                 >
-                  <ListItemText primary={topic.slug} />
+                  <ListItemText
+                    primaryTypographyProps={{ fontSize: "20px" }}
+                    primary={topic.slug}
+                  />
                 </ListItemButton>
               </Link>
             </ListItem>
@@ -73,7 +76,7 @@ function TopicsLinks({ title, setTitle }) {
         onClick={toggleDrawer(true)}
         style={{ color: "#fa2020", padding: "30px" }}
       >
-        <h2>{title}</h2>
+        <h2 style={{ color: "black" }}>{title}</h2>
       </Button>
       <Drawer
         open={isOpen}

@@ -7,6 +7,8 @@ import Card from "@mui/joy/Card";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
+import { format } from "date-fns";
+
 import { patchArticle } from "../api/articles";
 
 function Article() {
@@ -65,10 +67,22 @@ function Article() {
   }
   return (
     <>
-      <Card variant="soft">
+      <Card variant="outlined" style={{ backgroundColor: "white" }}>
         <article>
+          <p
+            style={{
+              color: "grey",
+              fontSize: "15px",
+              textAlign: "left",
+              marginLeft: "10px",
+              padding: "0.5rem",
+            }}
+          >
+            Posted by {article.author} on{" "}
+            {format(new Date(`${article.created_at}`), "p dd/MM/yyyy")}
+          </p>
           <h2>{article.title}</h2>
-          <h3>{article.author}</h3>
+
           {article.article_img_url ? (
             <img
               src={`${article.article_img_url}`}
@@ -77,7 +91,7 @@ function Article() {
           ) : null}
           <p>{article.body}</p>
           <div>
-            <p>
+            <p style={{ color: "grey", textAlign: "left", marginLeft: "10px" }}>
               votes: {displayedVotes} comments: {article.comment_count}
             </p>
             <button
