@@ -13,6 +13,11 @@ function Header() {
           display: "flex",
           alignContent: "center",
           border: "1px solid black",
+          borderRadius: "20px",
+          width: "100%",
+          marginBottom: "1rem",
+          marginTop: "1rem",
+          backgroundColor: "white",
         }}
       >
         <TopicsLinks title={title} setTitle={setTitle} />

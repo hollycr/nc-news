@@ -19,9 +19,11 @@ function CommentCard({ comment, setCommentsChange }) {
   }
 
   return (
-    <Card variant="outlined">
-      <h5>{comment.author}</h5>
-      <p>{comment.body}</p>
+    <Card variant="outlined" style={{ margin: "0.5rem" }}>
+      <h5 style={{ textAlign: "left", marginLeft: "1rem" }}>
+        {comment.author}
+      </h5>
+      <p style={{ padding: "1rem" }}>{comment.body}</p>
       <div style={{ display: "inline-flex", alignItems: "center" }}>
         <p style={{ marginRight: "10px" }}>votes: {comment.votes} </p>
         {comment.author === loggedInUser.username ? (
