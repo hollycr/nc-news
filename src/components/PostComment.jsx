@@ -40,6 +40,7 @@ function PostComment({ article_id, setCommentsChange }) {
             textAlign: "center",
             border: "1px solid black",
             background: "white",
+            color: "black",
           }}
           onChange={handleInput}
           value={userInput}
