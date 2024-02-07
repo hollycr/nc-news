@@ -10,7 +10,14 @@ import { getArticles } from "../api/articles";
 function ArticlesManager() {
   const { topic } = useParams();
   const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loadingMsg, setLoadingMsg] = useState({
+    text: "Just fetching some articles for you..",
+    style: {
+      border: "2px solid #fc9d92",
+      padding: "40px",
+      backgroundColor: "#faeae8",
+    },
+  });
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -18,11 +25,23 @@ function ArticlesManager() {
   const orderQuery = searchParams.get("order");
 
   useEffect(() => {
-    getArticles(topic, sortByQuery, orderQuery).then((res) => {
-      setArticles(res);
-      setIsLoading(false);
-    });
-  }, [sortByQuery, orderQuery]);
+    getArticles(topic, sortByQuery, orderQuery)
+      .then((res) => {
+        setArticles(res);
+        setLoadingMsg({ text: "" });
+      })
+      .catch((err) => {
+        console.log(err, "<< err in am useEffect");
+        setLoadingMsg({
+          text: "Uh oh! Couldn't find that topic.. maybe hit home, let's find something that does exist 👀",
+          style: {
+            border: "2px solid red",
+            padding: "40px",
+            backgroundColor: "#fcd4d5",
+          },
+        });
+      });
+  }, [topic, sortByQuery, orderQuery]);
 
   return (
     <>
@@ -31,8 +50,8 @@ function ArticlesManager() {
         setSearchParams={setSearchParams}
         searchParams={searchParams}
       />
-      {isLoading ? (
-        <p>Just fetching some articles for you..</p>
+      {loadingMsg.text ? (
+        <p style={loadingMsg.style}>{loadingMsg.text}</p>
       ) : (
         <ArticlesList articles={articles} />
       )}

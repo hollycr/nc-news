@@ -4,7 +4,7 @@ import UserContext from "./context/UserContext";
 import "./App.css";
 import Header from "./components/Header";
 import ArticlesManager from "./components/ArticlesManager";
-import SingleArticleManager from "./components/SingleArticleManager";
+import Article from "./components/Article";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({
@@ -21,10 +21,7 @@ function App() {
         <Routes>
           <Route path="/home" element={<ArticlesManager />} />
           <Route path="/articles/:topic" element={<ArticlesManager />} />
-          <Route
-            path="/article/:article_id"
-            element={<SingleArticleManager />}
-          />
+          <Route path="/article/:article_id" element={<Article />} />
           <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </UserContext.Provider>
