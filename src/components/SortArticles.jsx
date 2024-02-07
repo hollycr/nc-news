@@ -4,52 +4,63 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
-
 function SortArticles({ searchParams, setSearchParams }) {
-  function handleSort(event) {
-    event.preventDefault();
-    const params = { sortBy: event.target.value, order: searchParams.order };
-    setSearchParams(params);
+  function setSortOrder(value) {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("order", value);
+    setSearchParams(newParams);
   }
 
-  function handleOrder(event) {
-    event.preventDefault();
-    const params = { sortBy: searchParams.sortBy, order: event.target.value };
-    setSearchParams(params);
+  function setSortBy(value) {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("sort_by", value);
+    setSearchParams(newParams);
   }
 
   return (
-    <div>
-      <Box sx={{ minWidth: 120 }}>
+    <div style={{ display: "flex" }}>
+      <Box sx={{ minWidth: 130 }}>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Sort By:</InputLabel>
+          <InputLabel id="sort-by">Sort By:</InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={searchParams.sortBy}
+            labelId="sort-by-label"
+            id="sort-by-select"
+            value={searchParams.get("sort_by") || ""}
             label="sortBy"
-            onChange={handleSort}
           >
-            <MenuItem value={"created_at"}>Date</MenuItem>
-            <MenuItem value={"comment_count"}>Comment Count</MenuItem>
-            <MenuItem value={"votes"}>Votes</MenuItem>
+            <MenuItem
+              onClick={() => setSortBy("created_at")}
+              value={"created_at"}
+            >
+              Date
+            </MenuItem>
+            <MenuItem
+              onClick={() => setSortBy("comment_count")}
+              value={"comment_count"}
+            >
+              Comment Count
+            </MenuItem>
+            <MenuItem onClick={() => setSortBy("votes")} value={"votes"}>
+              Votes
+            </MenuItem>
           </Select>
         </FormControl>
       </Box>
-      <Box sx={{ minWidth: 120 }}>
+      <Box sx={{ minWidth: 130 }}>
         <FormControl fullWidth>
           <InputLabel id="select-order">Order By:</InputLabel>
           <Select
             labelId="select-order-label"
             id="select-order"
-            value={searchParams.order}
+            value={searchParams.get("order") || ""}
             label="Order"
-            onChange={handleOrder}
           >
-            <MenuItem value={"desc"}>Descending</MenuItem>
-            <MenuItem value={"asc"}>Ascending</MenuItem>
+            <MenuItem onClick={() => setSortOrder("desc")} value={"desc"}>
+              Descending
+            </MenuItem>
+            <MenuItem onClick={() => setSortOrder("asc")} value={"asc"}>
+              Ascending
+            </MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -57,12 +68,3 @@ function SortArticles({ searchParams, setSearchParams }) {
   );
 }
 export default SortArticles;
-
-/* 
-
-sort by date
-sort by comment count
-sort by votes
-flip the order between ascending and descending 
-
-*/

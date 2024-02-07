@@ -11,15 +11,18 @@ function ArticlesManager() {
   const { topic } = useParams();
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  let [searchParams, setSearchParams] = useState({ sortBy: "", orderBy: "" });
-  //const [sortBy, setSortBy] = useState({ sortBy: "", orderBy: "" });
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const sortByQuery = searchParams.get("sort_by");
+  const orderQuery = searchParams.get("order");
 
   useEffect(() => {
-    getArticles(topic, searchParams).then((res) => {
+    getArticles(topic, sortByQuery, orderQuery).then((res) => {
       setArticles(res);
       setIsLoading(false);
     });
-  }, [topic, searchParams]);
+  }, [sortByQuery, orderQuery]);
 
   return (
     <>
