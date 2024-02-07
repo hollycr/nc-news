@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import ArticlesList from "./ArticlesList";
 import PostArticle from "./PostArticle";
@@ -12,17 +12,25 @@ function ArticlesManager() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const sortByQuery = searchParams.get("sort_by");
+  const orderQuery = searchParams.get("order");
+
   useEffect(() => {
-    getArticles(topic).then((res) => {
+    getArticles(topic, sortByQuery, orderQuery).then((res) => {
       setArticles(res);
       setIsLoading(false);
     });
-  }, [topic]);
+  }, [sortByQuery, orderQuery]);
 
   return (
     <>
       <PostArticle />
-      <SortArticles />
+      <SortArticles
+        setSearchParams={setSearchParams}
+        searchParams={searchParams}
+      />
       {isLoading ? (
         <p>Just fetching some articles for you..</p>
       ) : (

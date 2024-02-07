@@ -1,10 +1,10 @@
 import axios from "axios";
 
-function getArticles(topic) {
-  let queryStr = "https://hollycr-nc-news.onrender.com/api/articles";
-  if (topic) queryStr += `?topic=${topic}`;
+function getArticles(topic, sortByQuery, orderQuery) {
+  const queryStr = "https://hollycr-nc-news.onrender.com/api/articles";
+  const params = { topic: topic, sort_by: sortByQuery, order: orderQuery };
 
-  return axios.get(queryStr).then(({ data }) => {
+  return axios.get(queryStr, { params }).then(({ data }) => {
     const { articles } = data;
     return articles;
   });
