@@ -8,28 +8,19 @@ function Header() {
 
   return (
     <>
-      <div
-        style={{
-          display: "flexbox",
-          alignContent: "center",
-          border: "1px solid black",
-          borderRadius: "20px",
-          margin: "0.5rem",
-          backgroundColor: "white",
-          padding: "1.5rem",
-          flexWrap: "wrap",
-        }}
-      >
+      <header>
+        <TopicsLinks title={title} setTitle={setTitle} />
         <Link
           to="/home"
           onClick={() => {
             setTitle("Topics");
           }}
         >
-          <h1>nc newsit</h1>
+          <h1 style={{ display: "flex" }}>NC NEWSIT</h1>
         </Link>
-      </div>
-      <TopicsLinks title={title} setTitle={setTitle} />
+      </header>
+
+      {/* <TopicsLinks title={title} setTitle={setTitle} /> */}
     </>
   );
 }
