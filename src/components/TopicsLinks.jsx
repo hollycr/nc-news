@@ -72,19 +72,28 @@ function TopicsLinks({ title, setTitle }) {
 
   return (
     <>
-      <Button
-        onClick={toggleDrawer(true)}
-        style={{ color: "#fa2020", padding: "30px" }}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          padding: "1rem",
+        }}
       >
-        <h2 style={{ color: "black", display: "inline-flex" }}>{title}</h2>
-      </Button>
-      <Drawer
-        open={isOpen}
-        onClose={toggleDrawer(false)}
-        onClick={toggleDrawer(false)}
-      >
-        {list()}
-      </Drawer>
+        <Button
+          onClick={toggleDrawer(true)}
+          style={{ color: "#fa2020", padding: "0" }}
+        >
+          <h2 style={{ color: "black", display: "inline-flex" }}>Ξ {title}</h2>
+        </Button>
+        <Drawer
+          open={isOpen}
+          onClose={toggleDrawer(false)}
+          onClick={toggleDrawer(false)}
+        >
+          {list()}
+        </Drawer>
+      </div>
     </>
   );
 }

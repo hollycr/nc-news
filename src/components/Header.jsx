@@ -10,29 +10,26 @@ function Header() {
     <>
       <div
         style={{
-          display: "flex",
+          display: "flexbox",
           alignContent: "center",
           border: "1px solid black",
           borderRadius: "20px",
-          width: "86%",
-          marginBottom: "1rem",
-          marginTop: "1rem",
+          margin: "0.5rem",
           backgroundColor: "white",
           padding: "1.5rem",
+          flexWrap: "wrap",
         }}
       >
-        <TopicsLinks title={title} setTitle={setTitle} />
-
         <Link
           to="/home"
           onClick={() => {
             setTitle("Topics");
           }}
-          style={{ marginInline: "70px" }}
         >
           <h1>nc newsit</h1>
         </Link>
       </div>
+      <TopicsLinks title={title} setTitle={setTitle} />
     </>
   );
 }
