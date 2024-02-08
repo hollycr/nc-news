@@ -90,6 +90,8 @@ function PostArticle() {
                 minWidth: "55vw",
                 maxWidth: "80vw",
                 margin: "10px",
+                background: "white",
+                color: "black",
               }}
               id="new-post-title"
               type="text"
@@ -147,6 +149,8 @@ function PostArticle() {
                 minWidth: "55vw",
                 maxWidth: "80vw",
                 margin: "10px",
+                background: "white",
+                color: "black",
               }}
               id="new-post-img"
               type="text"
