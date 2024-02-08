@@ -20,13 +20,19 @@ function SortArticles({ searchParams, setSearchParams }) {
   return (
     <div style={{ display: "flex", padding: "10px" }}>
       <Box sx={{ minWidth: 130 }}>
-        <FormControl fullWidth style={{ backgroundColor: "white" }}>
-          <InputLabel id="sort-by">Sort By:</InputLabel>
+        <FormControl
+          id="sort-by-form"
+          fullWidth
+          style={{ backgroundColor: "white" }}
+        >
+          <InputLabel htmlFor={"sort-by-select"} id="sort-by-label">
+            Sort By:
+          </InputLabel>
           <Select
             labelId="sort-by-label"
             id="sort-by-select"
             value={searchParams.get("sort_by") || ""}
-            label="sortBy"
+            inputProps={{ id: "sort-by-select" }}
           >
             <MenuItem
               onClick={() => setSortBy("created_at")}
@@ -48,12 +54,15 @@ function SortArticles({ searchParams, setSearchParams }) {
       </Box>
       <Box sx={{ minWidth: 130 }}>
         <FormControl fullWidth style={{ backgroundColor: "white" }}>
-          <InputLabel id="select-order">Order By:</InputLabel>
+          <InputLabel htmlFor={"select-order"} id="select-order-label">
+            Order By:
+          </InputLabel>
           <Select
             labelId="select-order-label"
             id="select-order"
             value={searchParams.get("order") || ""}
-            label="Order"
+            label="order"
+            inputProps={{ id: "select-order" }}
           >
             <MenuItem onClick={() => setSortOrder("desc")} value={"desc"}>
               Descending
