@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
+import Pagination from "@mui/material/Pagination";
 
 function ArticlesList({ articles }) {
   return (
@@ -11,6 +12,7 @@ function ArticlesList({ articles }) {
           </Link>
         );
       })}
+      {/* <Pagination count={10} /> */}
     </main>
   );
 }

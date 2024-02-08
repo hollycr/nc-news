@@ -20,9 +20,9 @@ function CommentCard({ comment, setCommentsChange }) {
 
   return (
     <Card variant="outlined" style={{ margin: "0.5rem" }}>
-      <h5 style={{ textAlign: "left", marginLeft: "1rem" }}>
+      <h3 style={{ textAlign: "left", marginLeft: "1rem", fontSize: "15px" }}>
         {comment.author}
-      </h5>
+      </h3>
       <p style={{ padding: "1rem" }}>{comment.body}</p>
       <div style={{ display: "inline-flex", alignItems: "center" }}>
         <p style={{ marginRight: "10px" }}>votes: {comment.votes} </p>

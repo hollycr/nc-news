@@ -71,7 +71,7 @@ function Article() {
         <article>
           <p
             style={{
-              color: "grey",
+              color: "#616060",
               fontSize: "15px",
               textAlign: "left",
               marginLeft: "10px",
@@ -91,7 +91,13 @@ function Article() {
           ) : null}
           <p>{article.body}</p>
           <div>
-            <p style={{ color: "grey", textAlign: "left", marginLeft: "10px" }}>
+            <p
+              style={{
+                color: "#616060",
+                textAlign: "left",
+                marginLeft: "10px",
+              }}
+            >
               votes: {displayedVotes} comments: {article.comment_count}
             </p>
             <button
