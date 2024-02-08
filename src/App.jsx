@@ -5,6 +5,7 @@ import "./App.css";
 import Header from "./components/Header";
 import ArticlesManager from "./components/ArticlesManager";
 import Article from "./components/Article";
+import PostArticle from "./components/PostArticle";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({
@@ -22,6 +23,7 @@ function App() {
           <Route path="/home" element={<ArticlesManager />} />
           <Route path="/articles/:topic" element={<ArticlesManager />} />
           <Route path="/article/:article_id" element={<Article />} />
+          <Route path="/postarticle" element={<PostArticle />} />
           <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </UserContext.Provider>

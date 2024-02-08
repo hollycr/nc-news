@@ -78,14 +78,16 @@ function TopicsLinks({ title, setTitle }) {
           flexDirection: "row",
           justifyContent: "flex-start",
           padding: "1rem",
+          fontSize: "3vw",
         }}
       >
-        <Button
+        <h2
           onClick={toggleDrawer(true)}
-          style={{ color: "#fa2020", padding: "0" }}
+          style={{ color: "black", display: "inline-flex" }}
         >
-          <h2 style={{ color: "black", display: "inline-flex" }}>Ξ {title}</h2>
-        </Button>
+          Ξ {title.toUpperCase()}
+        </h2>
+
         <Drawer
           open={isOpen}
           onClose={toggleDrawer(false)}

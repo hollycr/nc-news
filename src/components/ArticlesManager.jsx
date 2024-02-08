@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 
 import ArticlesList from "./ArticlesList";
-import PostArticle from "./PostArticle";
+import PostArticleLink from "./PostArticleLink";
 import SortArticles from "./SortArticles";
 
 import Pagination from "@mui/material/Pagination";
@@ -54,7 +54,6 @@ function ArticlesManager() {
         setLoadingMsg({ text: "" });
       })
       .catch((err) => {
-        console.log(err, "<< err in am useEffect");
         setLoadingMsg({
           text: "Uh oh! Couldn't find that topic.. maybe hit home, let's find something that does exist 👀",
           style: {
@@ -68,7 +67,7 @@ function ArticlesManager() {
 
   return (
     <>
-      <PostArticle />
+      <PostArticleLink />
       <SortArticles
         setSearchParams={setSearchParams}
         searchParams={searchParams}
