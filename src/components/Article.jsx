@@ -1,6 +1,7 @@
 import { getSingleArticle } from "../api/articles";
 import Comments from "./Comments";
-import { useEffect, useState } from "react";
+import UserContext from "../context/UserContext";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 
 import Card from "@mui/joy/Card";
@@ -12,11 +13,16 @@ import { format } from "date-fns";
 import { patchArticle } from "../api/articles";
 
 function Article() {
+  const { loggedInUser } = useContext(UserContext);
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
+
   const [displayedVotes, setDisplayedVotes] = useState(0);
+  const [displayedCommentNum, setDisplayedCommentNum] = useState(0);
+
   const [isDownButtonDisabled, setDownButtonDisabled] = useState(false);
   const [isUpButtonDisabled, setUpButtonDisabled] = useState(false);
+
   const [voteErrMsg, setVoteErrMsg] = useState("");
   const [userVote, setUserVote] = useState(1);
 
@@ -49,6 +55,7 @@ function Article() {
 
   useEffect(() => {
     setDisplayedVotes(article.votes);
+    setDisplayedCommentNum(article.comment_count);
   }, [article]);
 
   function upVote(votes) {
@@ -92,10 +99,28 @@ function Article() {
               textAlign: "left",
               marginLeft: "10px",
               padding: "0.5rem",
+              display: "flex",
+              justifyContent: "space-between",
             }}
           >
             Posted by {article.author} on{" "}
             {format(new Date(`${article.created_at}`), "p dd/MM/yyyy")}
+            {article.author === loggedInUser.username ? (
+              <button
+                value={article.article_id}
+                style={{
+                  backgroundColor: "#e4e4e4",
+                  color: "black",
+                  marginRight: "2vw",
+                  marginLeft: "2vw",
+                  padding: "1vw",
+                  alignContent: "right",
+                }}
+                // onClick={handleDelete}
+              >
+                delete article
+              </button>
+            ) : null}
           </p>
           <h2>{article.title}</h2>
 
@@ -114,7 +139,7 @@ function Article() {
                 marginLeft: "10px",
               }}
             >
-              votes: {displayedVotes} comments: {article.comment_count}
+              votes: {displayedVotes} comments: {displayedCommentNum}
             </p>
             <button
               id="up"
@@ -135,7 +160,11 @@ function Article() {
           <p>{voteErrMsg}</p>
         </article>
       </Card>
-      <Comments article_id={article_id} />
+      <Comments
+        article_id={article_id}
+        setDisplayedCommentNum={setDisplayedCommentNum}
+        displayedCommentNum={displayedCommentNum}
+      />
     </>
   );
 }

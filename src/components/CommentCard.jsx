@@ -8,14 +8,13 @@ import CardContent from "@mui/material/CardContent";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
-function CommentCard({ comment, setCommentsChange }) {
+function CommentCard({ comment, setCommentsChange, setDisplayedCommentNum }) {
   const { loggedInUser } = useContext(UserContext);
   const [feedbackMsg, setFeedbackMsg] = useState("");
   const [displayedVotes, setDisplayedVotes] = useState(0);
   const [userVote, setUserVote] = useState(1);
   const [isDownButtonDisabled, setDownButtonDisabled] = useState(false);
   const [isUpButtonDisabled, setUpButtonDisabled] = useState(false);
-  // const [voteErrMsg, setVoteErrMsg] = useState("");
 
   useEffect(() => {
     setDisplayedVotes(comment.votes);
@@ -52,9 +51,10 @@ function CommentCard({ comment, setCommentsChange }) {
   function handleDelete(event) {
     deleteComment(event.target.value).then(() => {
       setFeedbackMsg("deleted!");
-      setCommentsChange(true);
+      // setCommentsChange(true);
+      setDisplayedCommentNum((current) => (current -= 1));
     });
-    setCommentsChange(false);
+    // setCommentsChange(false);
   }
 
   return (

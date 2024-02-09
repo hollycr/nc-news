@@ -26,6 +26,8 @@ body {
   border: 1px solid black;
   max-width: 100%;
   padding: 20px;
+  margin-left: 5vw;
+  margin-right: 5vw;
 }
 
 .form-title {

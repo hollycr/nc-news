@@ -5,20 +5,20 @@ import PostComment from "./PostComment";
 
 import { getComments } from "../api/comments";
 
-function Comments({ article_id }) {
+function Comments(props) {
+  const { displayedCommentNum, setDisplayedCommentNum, article_id } = props;
   const [comments, setComments] = useState([]);
-  const [commentsChange, setCommentsChange] = useState(false);
 
   useEffect(() => {
     getComments(article_id).then((res) => {
       setComments(res);
     });
-  }, [commentsChange]);
+  }, [displayedCommentNum]);
 
   return (
     <section>
       <PostComment
-        setCommentsChange={setCommentsChange}
+        setDisplayedCommentNum={setDisplayedCommentNum}
         article_id={article_id}
       />
       {comments.map((comment) => {
@@ -26,7 +26,7 @@ function Comments({ article_id }) {
           <CommentCard
             key={comment.comment_id}
             comment={comment}
-            setCommentsChange={setCommentsChange}
+            setDisplayedCommentNum={setDisplayedCommentNum}
           />
         );
       })}

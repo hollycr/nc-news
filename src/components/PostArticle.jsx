@@ -26,10 +26,7 @@ function PostArticle() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log("clicked");
-
     postArticle(newArticle).then((article) => {
-      console.log("posted!", article);
       setNewArticle({
         author: loggedInUser.username,
         title: "",
