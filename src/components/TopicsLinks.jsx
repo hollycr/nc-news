@@ -1,9 +1,7 @@
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -85,9 +83,13 @@ function TopicsLinks({ title, setTitle }) {
       >
         <h2
           onClick={toggleDrawer(true)}
-          style={{ color: "black", display: "flex", alignItems: "center" }}
+          style={{
+            color: "black",
+            display: "flex",
+            alignItems: "center",
+          }}
         >
-          Ξ<p style={{ whiteSpace: "nowrap" }}> </p>
+          <span style={{ whiteSpace: "nowrap" }}>Ξ </span>
           {title.toUpperCase()}
         </h2>
 

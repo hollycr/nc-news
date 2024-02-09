@@ -10,7 +10,9 @@ function Header() {
   return (
     <>
       <header>
-        <TopicsLinks title={title} setTitle={setTitle} />
+        <h2>
+          <TopicsLinks title={title} setTitle={setTitle} />
+        </h2>
         <Link
           to="/home"
           onClick={() => {

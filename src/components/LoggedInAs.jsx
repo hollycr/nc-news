@@ -20,7 +20,11 @@ function LoggedInAs() {
           {loggedInUser.username}{" "}
         </span>
       </p>
-      <img className="avatar-img" src={loggedInUser.avatar_url} />
+      <img
+        className="avatar-img"
+        src={loggedInUser.avatar_url}
+        alt={`avatar image for ${loggedInUser.username}`}
+      />
     </>
   );
 }

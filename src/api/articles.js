@@ -50,9 +50,7 @@ function postArticle(article) {
 function deleteArticle(id) {
   return axios
     .delete(`https://hollycr-nc-news.onrender.com/api/articles/${id}`)
-    .then(() => {
-      console.log("article delete successful");
-    });
+    .then(() => {});
 }
 
 export {
