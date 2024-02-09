@@ -49,12 +49,18 @@ function CommentCard({ comment, setCommentsChange, setDisplayedCommentNum }) {
   }
 
   function handleDelete(event) {
-    deleteComment(event.target.value).then(() => {
-      setFeedbackMsg("deleted!");
-      // setCommentsChange(true);
-      setDisplayedCommentNum((current) => (current -= 1));
-    });
-    // setCommentsChange(false);
+    deleteComment(event.target.value)
+      .then(() => {
+        setFeedbackMsg("deleted!");
+
+        setDisplayedCommentNum((current) => (current -= 1));
+      })
+      .catch((err) => {
+        console.log(err);
+        setFeedbackMsg(
+          "Oops, something went wrong! Couldn't delete your comment."
+        );
+      });
   }
 
   return (

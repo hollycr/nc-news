@@ -1,4 +1,3 @@
-import { getSingleArticle } from "../api/articles";
 import Comments from "./Comments";
 import UserContext from "../context/UserContext";
 import { useEffect, useState, useContext } from "react";
@@ -10,7 +9,8 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 import { format } from "date-fns";
 
-import { patchArticle } from "../api/articles";
+import { patchArticle, deleteArticle, getSingleArticle } from "../api/articles";
+import { deleteComment, getComments } from "../api/comments";
 
 function Article() {
   const { loggedInUser } = useContext(UserContext);
@@ -19,12 +19,21 @@ function Article() {
 
   const [displayedVotes, setDisplayedVotes] = useState(0);
   const [displayedCommentNum, setDisplayedCommentNum] = useState(0);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    getComments(article_id).then((res) => {
+      setComments(res);
+    });
+  }, [displayedCommentNum]);
 
   const [isDownButtonDisabled, setDownButtonDisabled] = useState(false);
   const [isUpButtonDisabled, setUpButtonDisabled] = useState(false);
 
   const [voteErrMsg, setVoteErrMsg] = useState("");
   const [userVote, setUserVote] = useState(1);
+  const [deletedMsg, setDeletedMsg] = useState("");
+  const [deleteErrMsg, setDeleteErrMsg] = useState("");
 
   const [loadingMsg, setLoadingMsg] = useState({
     text: "Just loading your article...",
@@ -82,9 +91,51 @@ function Article() {
       });
   }
 
+  function handleDelete() {
+    let numToDelete = comments.length;
+    for (let i = 0; i < comments.length; i++) {
+      deleteComment(comments[i].comment_id)
+        .then(() => {
+          numToDelete--;
+          setDisplayedCommentNum((current) => (current -= 1));
+          if (numToDelete === 0) {
+            deleteArticle(article.article_id)
+              .then(() => {
+                setDeletedMsg("Successfully deleted article!");
+              })
+              .catch(({ response }) => {
+                const { data } = response;
+                console.log(data.msg);
+                setDeleteErrMsg(
+                  "Oops, something went wrong! Couldn't delete your article."
+                );
+              });
+          }
+        })
+        .catch((err) => {
+          console.log(err.data);
+          setDeleteErrMsg(
+            "Oops, something went wrong! Couldn't delete your article."
+          );
+        });
+    }
+  }
+
   if (loadingMsg.text) {
     return <p style={loadingMsg.style}>{loadingMsg.text}</p>;
   }
+
+  if (deletedMsg) {
+    return (
+      <Card
+        variant="outlined"
+        style={{ margin: "5vw", backgroundColor: "white" }}
+      >
+        <p>{deletedMsg}</p>
+      </Card>
+    );
+  }
+
   return (
     <>
       <Card
@@ -106,22 +157,25 @@ function Article() {
             Posted by {article.author} on{" "}
             {format(new Date(`${article.created_at}`), "p dd/MM/yyyy")}
             {article.author === loggedInUser.username ? (
-              <button
-                value={article.article_id}
-                style={{
-                  backgroundColor: "#e4e4e4",
-                  color: "black",
-                  marginRight: "2vw",
-                  marginLeft: "2vw",
-                  padding: "1vw",
-                  alignContent: "right",
-                }}
-                // onClick={handleDelete}
-              >
-                delete article
-              </button>
+              <>
+                <button
+                  value={article.article_id}
+                  style={{
+                    backgroundColor: "#e4e4e4",
+                    color: "black",
+                    marginRight: "2vw",
+                    marginLeft: "2vw",
+                    padding: "1vw",
+                    alignContent: "right",
+                  }}
+                  onClick={handleDelete}
+                >
+                  delete article
+                </button>
+              </>
             ) : null}
           </p>
+          <p>{deleteErrMsg}</p>
           <h2>{article.title}</h2>
 
           {article.article_img_url ? (
@@ -162,6 +216,7 @@ function Article() {
       </Card>
       <Comments
         article_id={article_id}
+        comments={comments}
         setDisplayedCommentNum={setDisplayedCommentNum}
         displayedCommentNum={displayedCommentNum}
       />

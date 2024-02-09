@@ -9,10 +9,13 @@ function getArticles(topic, sortByQuery, orderQuery, page) {
     p: page,
   };
 
-  return axios.get(queryStr, { params }).then(({ data }) => {
-    const { articles } = data;
-    return data;
-  });
+  return axios
+    .get(queryStr, { params })
+    .then(({ data }) => {
+      const { articles } = data;
+      return data;
+    })
+    .catch((err) => {});
 }
 
 function getSingleArticle(id) {
@@ -44,4 +47,18 @@ function postArticle(article) {
     });
 }
 
-export { getArticles, getSingleArticle, patchArticle, postArticle };
+function deleteArticle(id) {
+  return axios
+    .delete(`https://hollycr-nc-news.onrender.com/api/articles/${id}`)
+    .then(() => {
+      console.log("article delete successful");
+    });
+}
+
+export {
+  getArticles,
+  getSingleArticle,
+  patchArticle,
+  postArticle,
+  deleteArticle,
+};
