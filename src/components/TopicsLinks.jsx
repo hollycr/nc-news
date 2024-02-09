@@ -31,7 +31,12 @@ function TopicsLinks({ title, setTitle }) {
   };
 
   const list = () => (
-    <Box sx={{ display: "inline-flex", alignItems: "center" }}>
+    <Box
+      sx={{
+        display: "inline-flex",
+        alignItems: "center",
+      }}
+    >
       <CssBaseline />
       <Drawer
         sx={{
@@ -77,7 +82,6 @@ function TopicsLinks({ title, setTitle }) {
           display: "flex",
           flexDirection: "row",
           justifyContent: "flex-start",
-          padding: "1rem",
           fontSize: "3vw",
         }}
       >

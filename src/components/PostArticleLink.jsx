@@ -8,9 +8,17 @@ function PostArticleLink() {
       <Box
         sx={{
           background: "white",
+          width: "90vw",
+          marginLeft: "5vw",
+          marginBottom: "1vw",
+          marginTop: "1vw",
         }}
       >
-        <TextField fullWidth label="Create a post" id="create-a-post" />
+        <TextField
+          style={{ width: "90vw" }}
+          label="Create a post"
+          id="create-a-post"
+        />
       </Box>
     </Link>
   );
