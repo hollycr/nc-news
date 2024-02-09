@@ -25,6 +25,7 @@ function Article() {
   const [voteErrMsg, setVoteErrMsg] = useState("");
   const [userVote, setUserVote] = useState(1);
   const [deletedMsg, setDeletedMsg] = useState("");
+  const [deleteErrMsg, setDeleteErrMsg] = useState("");
 
   const [loadingMsg, setLoadingMsg] = useState({
     text: "Just loading your article...",
@@ -83,9 +84,17 @@ function Article() {
   }
 
   function handleDelete() {
-    deleteArticle(article.article_id).then(() => {
-      setDeletedMsg("deleted article!");
-    });
+    deleteArticle(article.article_id)
+      .then(() => {
+        setDeletedMsg("deleted article!");
+      })
+      .catch(({ response }) => {
+        const { data } = response;
+        console.log(data.msg);
+        setDeleteErrMsg(
+          "Oops, something went wrong! Couldn't delete your article."
+        );
+      });
   }
 
   if (loadingMsg.text) {
@@ -124,22 +133,25 @@ function Article() {
             Posted by {article.author} on{" "}
             {format(new Date(`${article.created_at}`), "p dd/MM/yyyy")}
             {article.author === loggedInUser.username ? (
-              <button
-                value={article.article_id}
-                style={{
-                  backgroundColor: "#e4e4e4",
-                  color: "black",
-                  marginRight: "2vw",
-                  marginLeft: "2vw",
-                  padding: "1vw",
-                  alignContent: "right",
-                }}
-                onClick={handleDelete}
-              >
-                delete article
-              </button>
+              <>
+                <button
+                  value={article.article_id}
+                  style={{
+                    backgroundColor: "#e4e4e4",
+                    color: "black",
+                    marginRight: "2vw",
+                    marginLeft: "2vw",
+                    padding: "1vw",
+                    alignContent: "right",
+                  }}
+                  onClick={handleDelete}
+                >
+                  delete article
+                </button>
+              </>
             ) : null}
           </p>
+          <p>{deleteErrMsg}</p>
           <h2>{article.title}</h2>
 
           {article.article_img_url ? (
