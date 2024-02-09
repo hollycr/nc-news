@@ -87,8 +87,7 @@ function PostArticle() {
             <input
               style={{
                 padding: "7px",
-                minWidth: "55vw",
-                maxWidth: "80vw",
+                width: "70vw",
                 margin: "10px",
                 background: "white",
                 color: "black",
@@ -146,8 +145,7 @@ function PostArticle() {
             <input
               style={{
                 padding: "7px",
-                minWidth: "55vw",
-                maxWidth: "80vw",
+                width: "49vw",
                 margin: "10px",
                 background: "white",
                 color: "black",
