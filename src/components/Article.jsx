@@ -14,10 +14,10 @@ import { patchArticle } from "../api/articles";
 function Article() {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
-  const [displayedVotes, setDisplayedVotes] = useState(5);
+  const [displayedVotes, setDisplayedVotes] = useState(0);
   const [isDownButtonDisabled, setDownButtonDisabled] = useState(false);
   const [isUpButtonDisabled, setUpButtonDisabled] = useState(false);
-  const [commentErrMsg, setCommentErrMsg] = useState("");
+  const [voteErrMsg, setVoteErrMsg] = useState("");
   const [userVote, setUserVote] = useState(1);
 
   const [loadingMsg, setLoadingMsg] = useState({
@@ -59,9 +59,7 @@ function Article() {
         setUserVote((current) => current * -1);
       })
       .catch((err) => {
-        setCommentErrMsg(
-          "Something went wrong - couldn't vote! Come back later."
-        );
+        setVoteErrMsg("Something went wrong - couldn't vote! Come back later.");
       });
   }
 
@@ -73,9 +71,7 @@ function Article() {
         setUserVote((current) => current * -1);
       })
       .catch((err) => {
-        setCommentErrMsg(
-          "Something went wrong - couldn't vote! Come back later."
-        );
+        setVoteErrMsg("Something went wrong - couldn't vote! Come back later.");
       });
   }
 
@@ -84,7 +80,10 @@ function Article() {
   }
   return (
     <>
-      <Card variant="outlined" style={{ backgroundColor: "white" }}>
+      <Card
+        variant="outlined"
+        style={{ margin: "5vw", backgroundColor: "white" }}
+      >
         <article>
           <p
             style={{
@@ -133,7 +132,7 @@ function Article() {
               <ThumbDownIcon />
             </button>
           </div>
-          <p>{commentErrMsg}</p>
+          <p>{voteErrMsg}</p>
         </article>
       </Card>
       <Comments article_id={article_id} />

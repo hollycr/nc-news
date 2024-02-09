@@ -41,7 +41,7 @@ function PostComment({ article_id, setCommentsChange }) {
       <div>
         <input
           style={{
-            width: "300px",
+            width: "80vw",
             height: "100px",
             textAlign: "center",
             border: "1px solid black",
