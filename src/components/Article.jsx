@@ -15,8 +15,10 @@ function Article() {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [displayedVotes, setDisplayedVotes] = useState(5);
-  const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const [isDownButtonDisabled, setDownButtonDisabled] = useState(false);
+  const [isUpButtonDisabled, setUpButtonDisabled] = useState(false);
   const [commentErrMsg, setCommentErrMsg] = useState("");
+  const [userVote, setUserVote] = useState(1);
 
   const [loadingMsg, setLoadingMsg] = useState({
     text: "Just loading your article...",
@@ -49,11 +51,26 @@ function Article() {
     setDisplayedVotes(article.votes);
   }, [article]);
 
-  function vote(votes) {
-    setButtonDisabled(true);
+  function upVote(votes) {
+    setDownButtonDisabled((current) => !current);
     patchArticle(article_id, votes)
       .then((res) => {
         setDisplayedVotes((current) => (current += votes));
+        setUserVote((current) => current * -1);
+      })
+      .catch((err) => {
+        setCommentErrMsg(
+          "Something went wrong - couldn't vote! Come back later."
+        );
+      });
+  }
+
+  function downVote(votes) {
+    setUpButtonDisabled((current) => !current);
+    patchArticle(article_id, votes)
+      .then((res) => {
+        setDisplayedVotes((current) => (current -= votes));
+        setUserVote((current) => current * -1);
       })
       .catch((err) => {
         setCommentErrMsg(
@@ -101,16 +118,17 @@ function Article() {
               votes: {displayedVotes} comments: {article.comment_count}
             </p>
             <button
+              id="up"
               aria-label="upvote by one"
-              onClick={() => vote(1)}
-              disabled={isButtonDisabled}
+              onClick={(event) => upVote(userVote)}
+              disabled={isUpButtonDisabled}
             >
               <ThumbUpIcon />
             </button>
             <button
               aria-label="downvote by one"
-              onClick={() => vote(-1)}
-              disabled={isButtonDisabled}
+              onClick={() => downVote(userVote)}
+              disabled={isDownButtonDisabled}
             >
               <ThumbDownIcon />
             </button>
