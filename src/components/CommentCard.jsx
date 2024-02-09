@@ -51,10 +51,9 @@ function CommentCard({ comment, setCommentsChange, setDisplayedCommentNum }) {
   function handleDelete(event) {
     deleteComment(event.target.value).then(() => {
       setFeedbackMsg("deleted!");
-      // setCommentsChange(true);
+
       setDisplayedCommentNum((current) => (current -= 1));
     });
-    // setCommentsChange(false);
   }
 
   return (

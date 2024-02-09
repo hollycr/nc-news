@@ -1,4 +1,3 @@
-import { getSingleArticle } from "../api/articles";
 import Comments from "./Comments";
 import UserContext from "../context/UserContext";
 import { useEffect, useState, useContext } from "react";
@@ -10,7 +9,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 import { format } from "date-fns";
 
-import { patchArticle } from "../api/articles";
+import { patchArticle, deleteArticle, getSingleArticle } from "../api/articles";
 
 function Article() {
   const { loggedInUser } = useContext(UserContext);
@@ -25,6 +24,7 @@ function Article() {
 
   const [voteErrMsg, setVoteErrMsg] = useState("");
   const [userVote, setUserVote] = useState(1);
+  const [deletedMsg, setDeletedMsg] = useState("");
 
   const [loadingMsg, setLoadingMsg] = useState({
     text: "Just loading your article...",
@@ -82,9 +82,27 @@ function Article() {
       });
   }
 
+  function handleDelete() {
+    deleteArticle(article.article_id).then(() => {
+      setDeletedMsg("deleted article!");
+    });
+  }
+
   if (loadingMsg.text) {
     return <p style={loadingMsg.style}>{loadingMsg.text}</p>;
   }
+
+  if (deletedMsg) {
+    return (
+      <Card
+        variant="outlined"
+        style={{ margin: "5vw", backgroundColor: "white" }}
+      >
+        <p>{deletedMsg}</p>
+      </Card>
+    );
+  }
+
   return (
     <>
       <Card
@@ -116,7 +134,7 @@ function Article() {
                   padding: "1vw",
                   alignContent: "right",
                 }}
-                // onClick={handleDelete}
+                onClick={handleDelete}
               >
                 delete article
               </button>

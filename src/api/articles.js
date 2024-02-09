@@ -44,4 +44,18 @@ function postArticle(article) {
     });
 }
 
-export { getArticles, getSingleArticle, patchArticle, postArticle };
+function deleteArticle(id) {
+  return axios
+    .delete(`https://hollycr-nc-news.onrender.com/api/articles/${id}`)
+    .then(() => {
+      console.log("delete successful");
+    });
+}
+
+export {
+  getArticles,
+  getSingleArticle,
+  patchArticle,
+  postArticle,
+  deleteArticle,
+};
