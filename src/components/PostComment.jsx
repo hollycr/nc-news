@@ -2,7 +2,11 @@ import { useState, useContext } from "react";
 import UserContext from "../context/UserContext";
 import { postComment } from "../api/comments";
 
-function PostComment({ article_id, setCommentsChange }) {
+function PostComment({
+  setDisplayedCommentNum,
+  article_id,
+  setCommentsChange,
+}) {
   const { loggedInUser } = useContext(UserContext);
   const standardMsg = `Commenting as ${loggedInUser.username}..`;
   const [userInput, setUserInput] = useState("");
@@ -12,7 +16,6 @@ function PostComment({ article_id, setCommentsChange }) {
     event.preventDefault();
     const regex = /[a-z]/i;
     if (!regex.test(userInput)) {
-      console.log("in the if");
       setFeedbackMsg("Hmm, that doesn't look like a very helpful comment..");
     } else {
       postComment(article_id, {
@@ -21,13 +24,15 @@ function PostComment({ article_id, setCommentsChange }) {
       })
         .then((res) => {
           setFeedbackMsg("Comment posted!");
-          setCommentsChange(true);
+          setDisplayedCommentNum((current) => (current += 1));
+          // setCommentsChange(true);
         })
         .catch((err) => {
+          console.log(err);
           setFeedbackMsg("Oops! Couldn't post your comment. Try again later!");
         });
       setUserInput("");
-      setCommentsChange(false);
+      // setCommentsChange(false);
     }
   }
 
