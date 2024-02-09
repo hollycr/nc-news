@@ -81,7 +81,7 @@ function ArticlesManager() {
               color: "#616060",
               fontSize: "12px",
               textAlign: "left",
-              marginLeft: "10px",
+              marginLeft: "5vw",
             }}
           >
             You're viewing page {page} of {totalPages} on {topic} posts.

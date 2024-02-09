@@ -18,7 +18,13 @@ function SortArticles({ searchParams, setSearchParams }) {
   }
 
   return (
-    <div style={{ display: "flex", padding: "10px" }}>
+    <div
+      style={{
+        display: "flex",
+        paddingLeft: "5vw",
+        paddingRight: "15vw",
+      }}
+    >
       <Box sx={{ minWidth: 130 }}>
         <FormControl
           id="sort-by-form"
