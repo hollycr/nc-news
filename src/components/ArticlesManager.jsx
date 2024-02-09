@@ -87,7 +87,11 @@ function ArticlesManager() {
             You're viewing page {page} of {totalPages} on {topic} posts.
           </p>
           <ArticlesList articles={articles} />
-          <Pagination count={totalPages} onClick={changePage} />
+          <Pagination
+            style={{ marginLeft: "5vw" }}
+            count={totalPages}
+            onClick={changePage}
+          />
         </>
       )}
     </>

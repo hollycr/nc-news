@@ -12,7 +12,6 @@ function ArticlesList({ articles }) {
           </Link>
         );
       })}
-      {/* <Pagination count={10} /> */}
     </main>
   );
 }
