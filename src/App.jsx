@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import UserContext from "./context/UserContext";
 import "./App.css";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import ArticlesManager from "./components/ArticlesManager";
 import Article from "./components/Article";
 import PostArticle from "./components/PostArticle";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/postarticle" element={<PostArticle />} />
           <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
+        <Footer />
       </UserContext.Provider>
     </>
   );
