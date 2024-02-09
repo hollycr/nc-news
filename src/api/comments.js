@@ -6,7 +6,8 @@ function getComments(id) {
     .then(({ data }) => {
       const { comments } = data;
       return comments;
-    });
+    })
+    .catch((err) => {});
 }
 
 function postComment(id, comment) {
@@ -22,9 +23,9 @@ function postComment(id, comment) {
 }
 
 function deleteComment(comment_id) {
-  return axios.delete(
-    `https://hollycr-nc-news.onrender.com/api/comments/${comment_id}`
-  );
+  return axios
+    .delete(`https://hollycr-nc-news.onrender.com/api/comments/${comment_id}`)
+    .catch((err) => {});
 }
 
 function patchComment(id, votes) {

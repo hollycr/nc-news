@@ -6,14 +6,15 @@ import PostComment from "./PostComment";
 import { getComments } from "../api/comments";
 
 function Comments(props) {
-  const { displayedCommentNum, setDisplayedCommentNum, article_id } = props;
-  const [comments, setComments] = useState([]);
+  const { comments, displayedCommentNum, setDisplayedCommentNum, article_id } =
+    props;
+  // const [comments, setComments] = useState([]);
 
-  useEffect(() => {
-    getComments(article_id).then((res) => {
-      setComments(res);
-    });
-  }, [displayedCommentNum]);
+  // useEffect(() => {
+  //   getComments(article_id).then((res) => {
+  //     setComments(res);
+  //   });
+  // }, [displayedCommentNum]);
 
   return (
     <section>

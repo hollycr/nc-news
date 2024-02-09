@@ -10,6 +10,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { format } from "date-fns";
 
 import { patchArticle, deleteArticle, getSingleArticle } from "../api/articles";
+import { deleteComment, getComments } from "../api/comments";
 
 function Article() {
   const { loggedInUser } = useContext(UserContext);
@@ -18,6 +19,13 @@ function Article() {
 
   const [displayedVotes, setDisplayedVotes] = useState(0);
   const [displayedCommentNum, setDisplayedCommentNum] = useState(0);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    getComments(article_id).then((res) => {
+      setComments(res);
+    });
+  }, [displayedCommentNum]);
 
   const [isDownButtonDisabled, setDownButtonDisabled] = useState(false);
   const [isUpButtonDisabled, setUpButtonDisabled] = useState(false);
@@ -84,17 +92,33 @@ function Article() {
   }
 
   function handleDelete() {
-    deleteArticle(article.article_id)
-      .then(() => {
-        setDeletedMsg("deleted article!");
-      })
-      .catch(({ response }) => {
-        const { data } = response;
-        console.log(data.msg);
-        setDeleteErrMsg(
-          "Oops, something went wrong! Couldn't delete your article."
-        );
-      });
+    let numToDelete = comments.length;
+    for (let i = 0; i < comments.length; i++) {
+      deleteComment(comments[i].comment_id)
+        .then(() => {
+          numToDelete--;
+          setDisplayedCommentNum((current) => (current -= 1));
+          if (numToDelete === 0) {
+            deleteArticle(article.article_id)
+              .then(() => {
+                setDeletedMsg("Successfully deleted article!");
+              })
+              .catch(({ response }) => {
+                const { data } = response;
+                console.log(data.msg);
+                setDeleteErrMsg(
+                  "Oops, something went wrong! Couldn't delete your article."
+                );
+              });
+          }
+        })
+        .catch((err) => {
+          console.log(err.data);
+          setDeleteErrMsg(
+            "Oops, something went wrong! Couldn't delete your article."
+          );
+        });
+    }
   }
 
   if (loadingMsg.text) {
@@ -192,6 +216,7 @@ function Article() {
       </Card>
       <Comments
         article_id={article_id}
+        comments={comments}
         setDisplayedCommentNum={setDisplayedCommentNum}
         displayedCommentNum={displayedCommentNum}
       />
