@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import TopicsLinks from "./TopicsLinks";
-import { Divider } from "@mui/material";
 import LoggedInAs from "./LoggedInAs";
+import UserContext from "../context/UserContext";
 
 function Header() {
   const [title, setTitle] = useState("Topics");
+  const { loggedInUser } = useContext(UserContext);
 
   return (
     <>
@@ -21,10 +22,10 @@ function Header() {
         >
           <h1>NC NEWSIT</h1>
         </Link>
+        {/* <Link style={{ color: "black" }} to={`/user/${loggedInUser.username}`}> */}
         <LoggedInAs />
+        {/* </Link> */}
       </header>
-
-      {/* <TopicsLinks title={title} setTitle={setTitle} /> */}
     </>
   );
 }

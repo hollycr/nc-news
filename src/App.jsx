@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import UserContext from "./context/UserContext";
 import "./App.css";
 import Header from "./components/Header";
+import User from "./components/User";
 import Footer from "./components/Footer";
 import ArticlesManager from "./components/ArticlesManager";
 import Article from "./components/Article";
@@ -10,10 +11,9 @@ import PostArticle from "./components/PostArticle";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({
-    username: "cooljmessy",
-    name: "Peter Messy",
-    avatar_url:
-      "https://vignette.wikia.nocookie.net/mrmen/images/1/1a/MR_MESSY_4A.jpg/revision/latest/scale-to-width-down/250?cb=20170730171002",
+    username: "Default User",
+    name: "Anon",
+    avatar_url: "https://static.thenounproject.com/png/5034901-200.png",
   });
 
   return (
@@ -25,6 +25,7 @@ function App() {
           <Route path="/articles/:topic" element={<ArticlesManager />} />
           <Route path="/article/:article_id" element={<Article />} />
           <Route path="/postarticle" element={<PostArticle />} />
+          <Route path="/user/:username" element={<User />} />
           <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
         <Footer />
