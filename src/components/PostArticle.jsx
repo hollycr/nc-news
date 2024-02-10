@@ -19,6 +19,7 @@ function PostArticle() {
     topic: "",
     article_img_url: "",
   });
+  const [feedbackMsg, setFeedbackMsg] = useState("");
   const [confirmationMsg, setConfirmationMsg] = useState("");
   useEffect(() => {
     getTopics().then((res) => setTopics(res));
@@ -26,16 +27,24 @@ function PostArticle() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    postArticle(newArticle).then((article) => {
-      setNewArticle({
-        author: loggedInUser.username,
-        title: "",
-        body: "",
-        topic: "",
-        article_img_url: "",
+    const regex = /[a-z]/i;
+    if (!regex.test(newArticle.body) || !regex.test(newArticle.title)) {
+      setFeedbackMsg(
+        "Hmm, that doesn't look like a very useful article.. seems like you're missing something!"
+      );
+    } else {
+      setFeedbackMsg("");
+      postArticle(newArticle).then((article) => {
+        setNewArticle({
+          author: loggedInUser.username,
+          title: "",
+          body: "",
+          topic: "",
+          article_img_url: "",
+        });
+        setConfirmationMsg(article.article_id);
       });
-      setConfirmationMsg(article.article_id);
-    });
+    }
   }
 
   return (
@@ -136,7 +145,7 @@ function PostArticle() {
               />
             </Box>
           </div>
-
+          <p>{feedbackMsg}</p>
           <div className="form-title">
             <label htmlFor="new-post-img">Image URL (optional): </label>
             <input
