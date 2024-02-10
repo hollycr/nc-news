@@ -25,7 +25,6 @@ function PostComment({
         .then((res) => {
           setFeedbackMsg("Comment posted!");
           setDisplayedCommentNum((current) => (current += 1));
-          // setCommentsChange(true);
         })
         .catch((err) => {
           console.log(err);
