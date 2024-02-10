@@ -81,7 +81,7 @@ function Article() {
 
   function downVote(votes) {
     setUpButtonDisabled((current) => !current);
-    patchArticle(article_id, votes)
+    patchArticle(article_id, -votes)
       .then((res) => {
         setDisplayedVotes((current) => (current -= votes));
         setUserVote((current) => current * -1);
