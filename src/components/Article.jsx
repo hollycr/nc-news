@@ -92,47 +92,17 @@ function Article() {
   }
 
   function handleDelete() {
-    let numToDelete = comments.length;
-    if (numToDelete > 0) {
-      for (let i = 0; i < comments.length; i++) {
-        deleteComment(comments[i].comment_id)
-          .then(() => {
-            numToDelete--;
-            setDisplayedCommentNum((current) => (current -= 1));
-            if (numToDelete === 0) {
-              deleteArticle(article.article_id)
-                .then(() => {
-                  setDeletedMsg("Successfully deleted article!");
-                })
-                .catch(({ response }) => {
-                  const { data } = response;
-                  console.log(data.msg);
-                  setDeleteErrMsg(
-                    "Oops, something went wrong! Couldn't delete your article."
-                  );
-                });
-            }
-          })
-          .catch((err) => {
-            console.log(err.data);
-            setDeleteErrMsg(
-              "Oops, something went wrong! Couldn't delete your article."
-            );
-          });
-      }
-    } else {
-      deleteArticle(article.article_id)
-        .then(() => {
-          setDeletedMsg("Successfully deleted article!");
-        })
-        .catch(({ response }) => {
-          const { data } = response;
-          console.log(data.msg);
-          setDeleteErrMsg(
-            "Oops, something went wrong! Couldn't delete your article."
-          );
-        });
-    }
+    deleteArticle(article.article_id)
+      .then(() => {
+        setDeletedMsg("Successfully deleted article!");
+      })
+      .catch(({ response }) => {
+        const { data } = response;
+        console.log(data.msg);
+        setDeleteErrMsg(
+          "Oops, something went wrong! Couldn't delete your article."
+        );
+      });
   }
 
   if (loadingMsg.text) {
