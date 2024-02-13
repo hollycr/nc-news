@@ -8,7 +8,6 @@ function getArticles(topic, sortByQuery, orderQuery, page) {
     order: orderQuery,
     p: page,
   };
-
   return axios
     .get(queryStr, { params })
     .then(({ data }) => {
