@@ -22,9 +22,14 @@ function ArticleCard({ article }) {
             marginLeft: "10px",
           }}
         >
-          Posted by {article.author} on{" "}
+          Posted to{" "}
+          <span style={{ fontWeight: "bold" }}>
+            {article.topic.toUpperCase()}
+          </span>{" "}
+          by {article.author} on{" "}
           {format(new Date(`${article.created_at}`), "p dd/MM/yyyy")}
         </p>
+
         <h3 style={{ marginLeft: "1rem", marginRight: "1rem", padding: "0" }}>
           {article.title}
         </h3>
