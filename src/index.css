@@ -81,7 +81,12 @@ button:disabled {
 }
 
 .avatar-img {
-  width: 9vw;
+  margin-left: 1vw;
+  margin-right: 3vw;
+  width: 8vw;
+  height: 8vw;
+  object-fit: scale-down;
+
   border-radius: 50%;
   border: 1px solid grey;
 }

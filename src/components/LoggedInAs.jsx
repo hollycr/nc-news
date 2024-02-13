@@ -6,7 +6,10 @@ function LoggedInAs() {
   const { loggedInUser } = useContext(UserContext);
   return (
     <>
-      <Link style={{ color: "black" }} to={`/user/${loggedInUser.username}`}>
+      <Link
+        style={{ color: "black", marginRight: "2vw" }}
+        to={`/user/${loggedInUser.username}`}
+      >
         <p
           style={{
             fontSize: "2vw",
