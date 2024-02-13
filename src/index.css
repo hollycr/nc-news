@@ -83,10 +83,10 @@ button:disabled {
 .avatar-img {
   margin-left: 1vw;
   margin-right: 3vw;
+  background-color: white;
   width: 8vw;
   height: 8vw;
   object-fit: scale-down;
-
   border-radius: 50%;
   border: 1px solid grey;
 }
